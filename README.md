@@ -6,13 +6,13 @@ Putu Adi Saputra
 42130086
 
 apps toko sepatu:
-- profile = sudah
-- tampilan sidebar = sudah
-- implementasi perpindahan halaman + sidebar untuk tiap halaman = sudah
-- penambahan tampilan home = sudah
-- penambahan tampilan catalog = sudah
-- penambahan tampilan pada halaman salah satu sepatu yang diklik pada halaman katalog = sudah
-- penambahan tampilan wishlist = 
-- (kalau bisa tambahkan icon edit untuk mengubah data diri di profile) = 
-- (kalau bisa tambahkan icon favorit untuk menambah konten yang disukai di wishlist) = 
-- (kalau bisa implementasi dark mode atau light mode) = 
+- profile = SUDAH
+- tampilan sidebar = SUDAH
+- implementasi perpindahan halaman + sidebar untuk tiap halaman = SUDAH
+- penambahan tampilan home = SUDAH
+- penambahan tampilan catalog = SUDAH
+- penambahan tampilan pada halaman salah satu sepatu yang diklik pada halaman katalog = SUDAH
+- penambahan tampilan wishlist = SUDAH
+- (kalau bisa tambahkan icon edit untuk mengubah data diri di profile) = belum
+- (kalau bisa tambahkan icon favorit untuk menambah konten yang disukai di wishlist) = SUDAH
+- (kalau bisa implementasi dark mode atau light mode) = belum
