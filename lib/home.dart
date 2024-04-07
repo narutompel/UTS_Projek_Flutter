@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_application_uts/widget/homeShoes.dart';
 import 'package:flutter_application_uts/main.dart';
 import 'package:flutter_application_uts/catalog.dart';
 import 'package:flutter_application_uts/wishlist.dart';
@@ -54,9 +54,10 @@ class HomePage extends StatelessWidget {
                               SizedBox(
                                 width: 10,
                               ),
-                              Text(
-                                "Welcome Back, Adi !",
-                              )
+                              Text("Welcome Back, Adi !",
+                                  style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold))
                             ],
                           ),
                           Container(
@@ -99,109 +100,34 @@ class HomePage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(15),
-              child: Text(
-                "Trending Shoes 👟",
-              ),
+              child: Text("Trending Shoes 👟",
+                  style:
+                      TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
             ),
             TrendShoes(
-              imagePath: "aset/images/homeShoes1.jpg",
-              shoesName: "Nike High YZ", 
-              rating: "4.8", 
-              peopleBought: "45M people bought"),
+                imagePath: "aset/images/homeShoes1.jpg",
+                shoesName: "Nike High YZ",
+                rating: "4.8",
+                peopleBought: "45M people bought"),
             TrendShoes(
-              imagePath: "aset/images/homeShoes2.jpg", 
-              shoesName: "Nike Blue Ocean", 
-              rating: "5.0", 
-              peopleBought: "65M people bought"),
+                imagePath: "aset/images/homeShoes2.jpg",
+                shoesName: "Nike Blue Ocean",
+                rating: "5.0",
+                peopleBought: "65M people bought"),
             TrendShoes(
-              imagePath: "aset/images/homeShoes3.jpg", 
-              shoesName: "Nike Run-Green", 
-              rating: "4.4", 
-              peopleBought: "30M people bought"),
+                imagePath: "aset/images/homeShoes3.jpg",
+                shoesName: "Nike Run-Green",
+                rating: "4.4",
+                peopleBought: "30M people bought"),
             TrendShoes(
-              imagePath: "aset/images/homeShoes4.jpg", 
-              shoesName: "Nike White X", 
-              rating: "4.2", 
-              peopleBought: "27M people bought"),
+                imagePath: "aset/images/homeShoes4.jpg",
+                shoesName: "Nike White X",
+                rating: "4.2",
+                peopleBought: "27M people bought"),
           ],
         )),
       ),
       drawer: _myDrawer(context),
-    );
-  }
-}
-
-class TrendShoes extends StatelessWidget {
-  final String imagePath;
-  final String shoesName;
-  final String rating;
-  final String peopleBought;
-  const TrendShoes({
-      required this.imagePath,
-      required this.shoesName,
-      required this.rating,
-      required this.peopleBought,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 240,
-      child: Stack(
-        children: [
-          Card(
-            clipBehavior: Clip.antiAliasWithSaveLayer,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15)),
-              elevation: 10,
-            child: Column(
-              children: [
-                SizedBox(
-                width: double.infinity,
-                height: 150,
-                child: Image.asset(imagePath, fit: BoxFit.cover,),
-                  )
-              ],
-            ),
-          ), 
-          Positioned(
-            bottom: 0,
-            left: 10,
-            child: SizedBox(
-              height: 70,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(shoesName),
-                  SizedBox(
-                    height: 10
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.star, color: Colors.amber),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(rating),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Icon(
-                        Icons.shopping_bag_rounded, color: Colors.black
-                        ),
-                        SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        peopleBought
-                        )
-                    ],)
-                ],),
-              ),)
-        ],
-      ),
     );
   }
 }
