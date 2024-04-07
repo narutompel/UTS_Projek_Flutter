@@ -2,9 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_uts/catalog.dart';
 import 'package:flutter_application_uts/home.dart';
 import 'package:flutter_application_uts/wishlist.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => MyAppState()),
+        // Tambahkan provider lain jika ada
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -27,6 +36,22 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
+class MyAppState extends ChangeNotifier {
+  List<Shoe> _favorites = []; // Menyimpan daftar favorit
+
+  List<Shoe> get favorites => _favorites;
+
+  void toggleFavorite(Shoe shoe) {
+    if (_favorites.contains(shoe)) {
+      _favorites.remove(shoe); // Hapus dari daftar favorit jika sudah ada
+    } else {
+      _favorites.add(shoe); // Tambahkan ke daftar favorit jika belum ada
+    }
+    notifyListeners(); // Memberi tahu pendengar tentang perubahan
+  }
+}
+
 
 class ProfilePage extends StatelessWidget {
   @override

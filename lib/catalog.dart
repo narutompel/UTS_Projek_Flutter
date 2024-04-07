@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_uts/main.dart';
 import 'package:flutter_application_uts/home.dart';
 import 'package:flutter_application_uts/wishlist.dart';
+import 'package:provider/provider.dart';
 import 'shoesDetail.dart';
 
 class Shoe {
@@ -27,9 +28,12 @@ List<Shoe> shoeCatalog = [
 
 class CatalogPage extends StatelessWidget {
   const CatalogPage({Key? key}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
+    // Mendapatkan appState menggunakan Provider.of
+    final appState = Provider.of<MyAppState>(context); 
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Catalog'),
@@ -49,7 +53,7 @@ class CatalogPage extends StatelessWidget {
                 ),
               );
             },
-            child: ShoeCard(shoe: shoeCatalog[index]),
+            child: ShoeCard(shoe: shoeCatalog[index], appState: appState), // Mengirimkan appState ke ShoeCard
           );
         },
       ),
@@ -60,21 +64,46 @@ class CatalogPage extends StatelessWidget {
 
 class ShoeCard extends StatelessWidget {
   final Shoe shoe;
+  final MyAppState appState; // Tambahkan parameter appState
 
-  const ShoeCard({Key? key, required this.shoe}) : super(key: key);
+  const ShoeCard({Key? key, required this.shoe, required this.appState}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    IconData icon;
+    if (appState.favorites.contains(shoe)) {
+      icon = Icons.favorite;
+    } else {
+      icon = Icons.favorite_border;
+    }
+
     return Card(
       margin: EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(
-            shoe.imageShoes,
-            height: 150,
-            width: double.infinity,
-            fit: BoxFit.cover,
+          Stack(
+            children: [
+              Image.asset(
+                shoe.imageShoes,
+                height: 150,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+              Positioned(
+                top: 8.0,
+                right: 8.0,
+                child: GestureDetector(
+                  onTap: () {
+                    appState.toggleFavorite(shoe); // Menambah atau menghapus dari Wishlist
+                  },
+                  child: Icon(
+                    icon,
+                    color: Colors.red,
+                  ),
+                ),
+              ),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -98,38 +127,6 @@ class ShoeCard extends StatelessWidget {
     );
   }
 }
-
-// class ShoeDetailsPage extends StatelessWidget {
-//   final Shoe shoe;
-
-//   const ShoeDetailsPage({Key? key, required this.shoe}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(shoe.nameShoes),
-//       ),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             Image.asset(
-//               shoe.imageShoes,
-//               height: 200,
-//             ),
-//             SizedBox(height: 16.0),
-//             Text(
-//               '\$${shoe.priceShoes.toStringAsFixed(2)}',
-//               style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-//             ),
-//             // Add more details about the shoe as needed
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 Widget _myDrawer(BuildContext context) {
   return SizedBox(
