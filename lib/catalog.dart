@@ -13,6 +13,9 @@ class CatalogPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Catalog'),
+        backgroundColor:
+            Color.fromARGB(255, 122, 69, 20), // Ubah warna latar belakang
+        foregroundColor: const Color.fromARGB(255, 0, 0, 0), // Ubah warna teks
       ),
       body: Center(
         child: Column(
