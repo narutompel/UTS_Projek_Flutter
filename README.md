@@ -13,6 +13,5 @@ apps toko sepatu:
 - penambahan tampilan catalog = SUDAH
 - penambahan tampilan pada halaman salah satu sepatu yang diklik pada halaman katalog = SUDAH
 - penambahan tampilan wishlist = SUDAH
-- (kalau bisa tambahkan icon edit untuk mengubah data diri di profile) = belum
+- (kalau bisa tambahkan icon edit untuk mengubah data diri di profile) = Sudah
 - (kalau bisa tambahkan icon favorit untuk menambah konten yang disukai di wishlist) = SUDAH
-- (kalau bisa implementasi dark mode atau light mode) = belum
