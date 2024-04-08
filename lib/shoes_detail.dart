@@ -13,7 +13,7 @@ class ShoeDetailsPage extends StatelessWidget {
         title: Text(shoe.nameShoes),
       ),
       body: Center(
-        child: Column(
+        child: Column(  
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
@@ -22,10 +22,9 @@ class ShoeDetailsPage extends StatelessWidget {
             ),
             SizedBox(height: 16.0),
             Text(
-              '\$${shoe.priceShoes.toStringAsFixed(2)}',
+              'Only this price \$${shoe.priceShoes.toStringAsFixed(2)} and you will have a wonderful walk with the shoes. Everyone did, now its your time.',
               style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
             ),
-            // Add more details about the shoe as needed
           ],
         ),
       ),

@@ -3,7 +3,7 @@ import 'package:flutter_application_uts/main.dart';
 import 'package:flutter_application_uts/home.dart';
 import 'package:flutter_application_uts/wishlist.dart';
 import 'package:provider/provider.dart';
-import 'shoesDetail.dart';
+import 'shoes_detail.dart';
 
 class Shoe {
   final String nameShoes;
