@@ -9,7 +9,6 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => MyAppState()),
-        // Tambahkan provider lain jika ada
       ],
       child: MyApp(),
     ),
@@ -52,52 +51,101 @@ class MyAppState extends ChangeNotifier {
   }
 }
 
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
 
-class ProfilePage extends StatelessWidget {
+class _ProfilePageState extends State<ProfilePage> {
+  bool _isEditing = false;
+  List<UserInfo> _userInfoList = [
+    UserInfo(title: "Name", value: "Putu Adi Saputra"),
+    UserInfo(title: "Gender", value: "Male"),
+    UserInfo(title: "Phone Number", value: "085339966280"),
+    UserInfo(title: "Email", value: "putuad1saputr4@gmail.com"),
+    UserInfo(title: "Date of Birth", value: "17 November 2022"),
+  ];
+  List<UserInfo> _editedUserInfoList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _editedUserInfoList.addAll(_userInfoList);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // header:
       appBar: AppBar(
-        title: const Text('User Profile'),
+        title: Text('User Profile'),
         centerTitle: true,
-        backgroundColor:
-            Color.fromARGB(255, 122, 69, 20), // Ubah warna latar belakang
-        foregroundColor: const Color.fromARGB(255, 0, 0, 0), // Ubah warna teks
+        backgroundColor: Color.fromARGB(255, 122, 69, 20),
+        foregroundColor: Color.fromARGB(255, 0, 0, 0),
       ),
-      // body:
-      body: ListView(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.zero,
-            child: Image.network(
-                "https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"),
-          ),
-          const ListTile(
-            title: Text("Putu Adi Saputra"),
-            subtitle: Text("Name"),
-          ),
-          const ListTile(
-            title: Text("Male"),
-            subtitle: Text("Gender"),
-          ),
-          const ListTile(
-            title: Text("085339966280"),
-            subtitle: Text("Phone Number"),
-          ),
-          const ListTile(
-            title: Text("putuad1saputr4@gmail.com"),
-            subtitle: Text("Email"),
-          ),
-          const ListTile(
-            title: Text("17 November 2022"),
-            subtitle: Text("Date of Birth"),
-          ),
-        ],
+      body: ListView.builder(
+        itemCount: _userInfoList.length + 1,
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            return _buildProfileImage();
+          }
+          final userInfo = _editedUserInfoList[index - 1];
+          return ListTile(
+            title: _isEditing
+                ? TextFormField(
+                    initialValue: userInfo.value,
+                    onChanged: (newValue) {
+                      _editedUserInfoList[index - 1] = UserInfo(
+                        title: userInfo.title,
+                        value: newValue,
+                      );
+                    },
+                  )
+                : Text(userInfo.value),
+            subtitle: Text(userInfo.title),
+          );
+        },
       ),
       drawer: _myDrawer(context),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            if (_isEditing) {
+              _userInfoList = List.from(_editedUserInfoList);
+            }
+            _toggleEditing();
+          });
+        },
+        backgroundColor: Colors.brown,
+        child: Icon(_isEditing ? Icons.save : Icons.edit),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
+
+  Widget _buildProfileImage() {
+    return Padding(
+      padding: EdgeInsets.all(20.0),
+      child: CircleAvatar(
+        radius: 60,
+        backgroundImage: NetworkImage(
+          "https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
+        ),
+      ),
+    );
+  }
+
+  void _toggleEditing() {
+    setState(() {
+      _isEditing = !_isEditing;
+    });
+  }
+}
+
+class UserInfo {
+  final String title;
+  final String value;
+
+  UserInfo({required this.title, required this.value});
 }
 
 Widget _myDrawer(BuildContext context) {

@@ -5,7 +5,7 @@ import 'package:flutter_application_uts/main.dart';
 import 'package:provider/provider.dart';
 
 class WishlistPage extends StatelessWidget {
-  const WishlistPage({Key? key}) : super(key: key);
+  const WishlistPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,6 @@ class WishlistPage extends StatelessWidget {
                       height: 50, // Adjust the height as needed
                     ),
                     title: Text(shoe.nameShoes),
-                    // You can add more details about the item here
                   ),
                 );
               },
